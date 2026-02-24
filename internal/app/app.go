@@ -10,7 +10,7 @@ import (
 	"github.com/zkxjzmswkwl/go-grpc-testing/internal/store/memory"
 )
 
-// (csmith): This is pretty silly and not meant to be used in prod.
+// (carter): This is pretty silly and not meant to be used in prod.
 
 type ChatService struct {
 	chatv1connect.UnimplementedChatServiceHandler

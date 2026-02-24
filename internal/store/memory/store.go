@@ -10,7 +10,7 @@ import (
 	chatv1 "github.com/zkxjzmswkwl/go-grpc-testing/gen/go/proto/chat/v1"
 )
 
-// (csmith): This is pretty silly and not meant to be used in prod.
+// (carter): This is pretty silly and not meant to be used in prod.
 type Store struct {
 	Mu sync.RWMutex
 

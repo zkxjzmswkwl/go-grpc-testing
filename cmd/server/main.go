@@ -20,7 +20,7 @@ func main() {
 	store := memory.NewStore()
 	svc := app.NewChatService(store)
 
-	// (csmith): can still use chi middleware etc
+	// (carter): can still use chi middleware etc
 	r := chi.NewRouter()
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)

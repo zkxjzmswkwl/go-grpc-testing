@@ -4,7 +4,7 @@ from chat.v1 import chat_pb2_grpc
 
 def main():
     channel = grpc.insecure_channel('localhost:8080')
-    # (csmith): we'd probably want to wrap/stub out `chat_pb2_grpc`. Offends the eyes, if you ask me.
+    # (carter): we'd probably want to wrap/stub out `chat_pb2_grpc`. Offends the eyes, if you ask me.
     client = chat_pb2_grpc.ChatServiceStub(channel)
 
     user_resp = client.CreateUser(chat_pb2.CreateUserRequest(username="carter"))
