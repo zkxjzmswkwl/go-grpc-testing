@@ -1,0 +1,150 @@
+syntax = "proto3";
+
+package chat.v1;
+
+option go_package = "github.com/zkxjzmswkwl/go-grpc-testing/gen/go/proto/chat/v1;chatv1";
+
+import "google/protobuf/timestamp.proto";
+
+service ChatService {
+    rpc CreateServer(CreateServerRequest) returns (CreateServerResponse);
+    rpc ListServers(ListServersRequest) returns (ListServersResponse);
+    rpc CreateChannel(CreateChannelRequest) returns (CreateChannelResponse);
+    rpc ListChannels(ListChannelsRequest) returns (ListChannelsResponse);
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+    rpc GetUser(GetUserRequest) returns (GetUserResponse);
+    rpc SendChannelMessage(SendChannelMessageRequest) returns (SendChannelMessageResponse);
+    rpc ListChannelMessages(ListChannelMessagesRequest) returns (ListChannelMessagesResponse);
+    rpc SendDM(SendDMRequest) returns (SendDMResponse);
+    rpc ListDMs(ListDMsRequest) returns (ListDMsResponse);
+}
+
+message Server {
+    string id = 1;
+    string name = 2;
+    google.protobuf.Timestamp created_at = 3;
+}
+
+message Channel {
+    string id = 1;
+    string server_id = 2;
+    string name = 3;
+    google.protobuf.Timestamp created_at = 4;
+}
+
+message User {
+    string id = 1;
+    string username = 2;
+    google.protobuf.Timestamp created_at = 3;
+  }
+  
+  message Message {
+    string id = 1;
+    string author_user_id = 2;
+    google.protobuf.Timestamp created_at = 3;
+  
+    oneof destination {
+      ChannelDestination channel = 10;
+      DMDestination dm = 11;
+    }
+  
+    string content = 20;
+  }
+  
+  message ChannelDestination {
+    string server_id = 1;
+    string channel_id = 2;
+  }
+  
+  message DMDestination {
+    string user_id_a = 1;
+    string user_id_b = 2;
+  }
+  
+  message CreateServerRequest {
+    string name = 1;
+  }
+  
+  message CreateServerResponse {
+    Server server = 1;
+  }
+  
+  message ListServersRequest {}
+  
+  message ListServersResponse {
+    repeated Server servers = 1;
+  }
+  
+  message CreateChannelRequest {
+    string server_id = 1;
+    string name = 2;
+  }
+  
+  message CreateChannelResponse {
+    Channel channel = 1;
+  }
+  
+  message ListChannelsRequest {
+    string server_id = 1;
+  }
+  
+  message ListChannelsResponse {
+    repeated Channel channels = 1;
+  }
+  
+  message CreateUserRequest {
+    string username = 1;
+  }
+  
+  message CreateUserResponse {
+    User user = 1;
+  }
+  
+  message GetUserRequest {
+    string user_id = 1;
+  }
+  
+  message GetUserResponse {
+    User user = 1;
+  }
+  
+  message SendChannelMessageRequest {
+    string server_id = 1;
+    string channel_id = 2;
+    string author_user_id = 3;
+    string content = 4;
+  }
+  
+  message SendChannelMessageResponse {
+    Message message = 1;
+  }
+  
+  message ListChannelMessagesRequest {
+    string server_id = 1;
+    string channel_id = 2;
+    int32 limit = 3;
+  }
+  
+  message ListChannelMessagesResponse {
+    repeated Message messages = 1;
+  }
+  
+  message SendDMRequest {
+    string author_user_id = 1;
+    string recipient_user_id = 2;
+    string content = 3;
+  }
+  
+  message SendDMResponse {
+    Message message = 1;
+  }
+  
+  message ListDMsRequest {
+    string user_id_a = 1;
+    string user_id_b = 2;
+    int32 limit = 3;
+  }
+  
+  message ListDMsResponse {
+    repeated Message messages = 1;
+  }
